@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+    .carousel img {
+      width: 100%;
+      display: none;
+      border-radius: 10px;
+    }
+    .carousel img.active {
+      display: block;
+      animation: fade 1.5s;
+    }
+    @keyframes fade {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      user-select: none;
+    }
+    .next {
+      right: 10px;
+    }
+    .prev {
+      left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <img src="https://drive.google.com/file/d/1qXx2S0snEfWVy6a4vFMy-yBSQ6_4pTwr/view?usp=sharing" class="active">
+    <img src="https://drive.google.com/file/d/1c3BEIEHxhMpdvyzTOIageIRgxsGeX-eV/view?usp=sharing">
+    <div class="prev" onclick="prevSlide()">&#10094;</div>
+    <div class="next" onclick="nextSlide()">&#10095;</div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel img');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000); // Автопереключение каждые 5 секунд
+  </script>
+</body>
+</html>
